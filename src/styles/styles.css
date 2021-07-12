@@ -48,6 +48,14 @@ body {
 
 .grid {
     background: url(../images/grid-bg.png);
+    background-size: cover;
     width: 450px;
     height: 450px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.square {
+    width: 30px;
+    height: 30px;
 }
