@@ -1,0 +1,53 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Oxygen Mono', monospace;
+    background: linear-gradient(to bottom, rgba(33, 1, 36, 1) 0%, rgba(33, 1, 36, 0.9) 100%);
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.game {
+    background-color: #FFFCE8;
+    color: #371A38;
+    box-sizing: content-box;
+    padding: 20px;
+    display: inline-block;
+}
+
+.title {
+    font-family: 'Bungee Shade', fantasy;
+    font-size: 6rem;
+    text-align: center;
+    margin-bottom: 0.5em;
+}
+
+.score-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5em;
+}
+
+.apples {
+    display: flex;
+    align-items: center;
+}
+
+.apple-small {
+    width: 20px;
+    margin-right: 0.5em;
+}
+
+.grid {
+    background: url(../images/grid-bg.png);
+    width: 450px;
+    height: 450px;
+}

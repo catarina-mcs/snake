@@ -4,10 +4,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Oxygen+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles/styles.css">
     <title>Snake</title>
 </head>
 <body>
+    <section class="game">
+        <h1 class="title">Snake</h1>
+        <div class="score-info">
+            <div class="apples">
+                <img src="./images/apple.png" alt="Apple Icon" class="apple-small">
+                <span id="apple-count">0</span>
+            </div>
+            <p>Score: <span id="score">0</span> pts</p>
+        </div>
+        <div class="grid"></div>
+    </section>
+
     <script src="./scripts/index.js"></script>
 </body>
 </html>
