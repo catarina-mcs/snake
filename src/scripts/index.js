@@ -1,5 +1,15 @@
 const gridSize = 15;
 const grid = document.querySelector('.grid');
+const squares = document.getElementsByClassName('square');
+const appleCountDisplay = document.getElementById('apple-count');
+const scoreDisplay = document.getElementById('score');
+let appleCount = 0;
+let score = 0;
+let currentSnake = [0,1,2];
+let direction = 1;
+let intervalTime = 1000;
+let speed = 0.8;
+let appleIndex, timerId;
 
 function createGrid() {
     for (let i=0; i < gridSize*gridSize; i++) {
@@ -8,5 +18,82 @@ function createGrid() {
         square.classList.add('square');
     }
 }
-
 createGrid();
+
+function generateApple() {
+    do {
+        appleIndex = Math.floor(Math.random() * squares.length);
+    } while (squares[appleIndex].classList.contains('snake'));
+    squares[appleIndex].innerHTML = '<img src="./images/apple.png" class="apple">'
+}
+
+function startGame() {
+    currentSnake.forEach(i => squares[i].classList.add('snake'));
+    generateApple();
+    document.addEventListener('keydown', startMoving);
+}
+startGame();
+
+function startMoving(event) {
+    if (event.key === 'Enter') {
+        document.addEventListener('keydown', controlGame);
+        timerId = setInterval(move, intervalTime);
+    }
+}
+
+function move() {
+    let snakeHead = currentSnake[currentSnake.length - 1];
+    let newSnakeHead;
+    let snakeTail;
+
+    if (
+        (snakeHead + gridSize >= gridSize*gridSize && direction === gridSize ) ||
+        (snakeHead % gridSize === gridSize - 1 && direction === 1) ||
+        (snakeHead % gridSize === 0 && direction === -1) ||
+        (snakeHead - gridSize < 0 && direction === -gridSize) ||
+        squares[snakeHead + direction].classList.contains('snake')
+    ) {
+        window.alert('You have lost');
+        clearInterval(timerId);
+        return;
+    }
+
+    currentSnake.push(snakeHead + direction);
+    newSnakeHead = currentSnake[currentSnake.length - 1];
+    snakeTail = currentSnake.shift();
+    squares[newSnakeHead].classList.add('snake');
+    squares[snakeTail].classList.remove('snake');
+
+    if (squares[newSnakeHead].firstElementChild.classList.contains('apple')) {
+        squares[newSnakeHead].innerHTML = '';
+        currentSnake.unshift(snakeTail);
+        squares[snakeTail].classList.add('snake');
+        appleCount++;
+        score = appleCount * 5;
+        appleCountDisplay.textContent = appleCount;
+        scoreDisplay.textContent = score;
+
+        generateApple();
+        clearInterval(timerId);
+
+        if (intervalTime > 400) intervalTime = intervalTime * speed;
+
+        timerId = setInterval(move, intervalTime);
+    }
+}
+
+function controlGame(event) {
+    switch (event.key) {
+        case 'ArrowRight':
+            direction = 1;
+            break;
+        case 'ArrowLeft':
+            direction = -1;
+            break;
+        case 'ArrowDown':
+            direction = gridSize;
+            break;
+        case 'ArrowUp':
+            direction = -gridSize;
+    }
+}
