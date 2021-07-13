@@ -18,6 +18,7 @@ body {
     background-color: #FFFCE8;
     color: #371A38;
     box-sizing: content-box;
+    margin: 0 5em;
     padding: 20px;
     display: inline-block;
     position: relative;
@@ -93,8 +94,10 @@ body {
 }
 
 .gameover {
-    margin-bottom: 1em;
     font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 1em;
 }
 
 input {
@@ -105,4 +108,28 @@ input {
     border: 1px solid #371A38;
     margin-bottom: 2em;
     padding: 0.5em;
+}
+
+.commands, .leaderboard {
+    color: #FFFCE8;
+    background-color: rgba(255, 252, 232, 0.05);
+    padding: 1.875em;
+}
+
+.commands {
+    text-align: center;
+}
+
+.commands p {
+    max-width: 185px;
+    margin-bottom: 1.5em;
+}
+
+.enter {
+    width: 52.5px;
+    margin-bottom: 3.75em;
+}
+
+.arrows {
+    width: 115px;
 }
