@@ -118,10 +118,10 @@ input {
 
 .commands {
     text-align: center;
+    min-width: 225px;
 }
 
 .commands p {
-    max-width: 185px;
     margin-bottom: 1.5em;
 }
 
@@ -132,4 +132,19 @@ input {
 
 .arrows {
     width: 115px;
+}
+
+.leaderboard {
+    min-width: 300px;
+    min-height: 440px;
+    display: grid;
+    grid-row-gap: 0.7em;
+    grid-column-gap: 2em;
+    grid-template-columns: repeat(3, auto); 
+}
+
+.score-title {
+    text-align: center;
+    margin-bottom: 1.5em;
+    grid-column: 1 / -1;
 }
