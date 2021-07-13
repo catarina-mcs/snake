@@ -20,6 +20,7 @@ body {
     box-sizing: content-box;
     padding: 20px;
     display: inline-block;
+    position: relative;
 }
 
 .title {
@@ -41,7 +42,7 @@ body {
     align-items: center;
 }
 
-.apple-small {
+.apple-score {
     width: 20px;
     margin-right: 0.5em;
 }
@@ -58,8 +59,50 @@ body {
 .square {
     width: 30px;
     height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .snake {
     background-color: #371A38;
+}
+
+.apple {
+    width: 25px;
+}
+
+.overlay {
+    background-color: rgba(0,0, 0, 0.5);
+    width: 450px;
+    height: 450px;
+    position: absolute;
+    bottom: 20px;
+}
+
+.popup-box {
+    color: #FFFCE8;
+    text-align: center;
+    background-color: #c53d30;
+    width: 65%;
+    padding: 2em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.gameover {
+    margin-bottom: 1em;
+    font-size: 1.5rem;
+}
+
+input {
+    font-family: 'Oxygen Mono', monospace;
+    text-align: center;
+    color: #371A38;
+    background-color: #FFFCE8;
+    border: 1px solid #371A38;
+    margin-bottom: 2em;
+    padding: 0.5em;
 }

@@ -3,13 +3,13 @@ const grid = document.querySelector('.grid');
 const squares = document.getElementsByClassName('square');
 const appleCountDisplay = document.getElementById('apple-count');
 const scoreDisplay = document.getElementById('score');
-let appleCount = 0;
-let score = 0;
+const overlay = document.querySelector('.overlay');
+// const playerName = document.getElementById('player-name');
 let currentSnake = [0,1,2];
-let direction = 1;
-let intervalTime = 1000;
+let appleIndex = 6;
 let speed = 0.8;
-let appleIndex, timerId;
+let direction, intervalTime, timerId, appleCount, score;
+
 
 function createGrid() {
     for (let i=0; i < gridSize*gridSize; i++) {
@@ -20,31 +20,49 @@ function createGrid() {
 }
 createGrid();
 
+
+function setupGame() {
+    document.removeEventListener('keydown', saveScore);
+    overlay.style.display = 'none';
+    currentSnake.forEach(i => squares[i].classList.remove('snake'));
+    squares[appleIndex].innerHTML = '';
+    clearInterval(timerId);
+
+    currentSnake = [0,1,2];
+    direction = 1;
+    intervalTime = 1000;
+    appleCount = 0;
+    score = 0;
+    appleCountDisplay.textContent = appleCount;
+    scoreDisplay.textContent = score;
+
+    currentSnake.forEach(i => squares[i].classList.add('snake'));
+    generateApple();
+    document.addEventListener('keydown', startGame);
+}
+setupGame();
+
+
 function generateApple() {
     do {
         appleIndex = Math.floor(Math.random() * squares.length);
     } while (squares[appleIndex].classList.contains('snake'));
-    squares[appleIndex].innerHTML = '<img src="./images/apple.png" class="apple">'
+    squares[appleIndex].innerHTML = '<img src="./images/apple.svg" alt="apple-icon" class="apple">'
 }
 
-function startGame() {
-    currentSnake.forEach(i => squares[i].classList.add('snake'));
-    generateApple();
-    document.addEventListener('keydown', startMoving);
-}
-startGame();
 
-function startMoving(event) {
+function startGame(event) {
     if (event.key === 'Enter') {
+        document.removeEventListener('keydown', startGame);
         document.addEventListener('keydown', controlGame);
         timerId = setInterval(move, intervalTime);
     }
 }
 
+
 function move() {
     let snakeHead = currentSnake[currentSnake.length - 1];
-    let newSnakeHead;
-    let snakeTail;
+    let newSnakeHead, snakeTail;
 
     if (
         (snakeHead + gridSize >= gridSize*gridSize && direction === gridSize ) ||
@@ -53,7 +71,8 @@ function move() {
         (snakeHead - gridSize < 0 && direction === -gridSize) ||
         squares[snakeHead + direction].classList.contains('snake')
     ) {
-        window.alert('You have lost');
+        overlay.style.display = 'block';
+        document.addEventListener('keydown', saveScore);
         clearInterval(timerId);
         return;
     }
@@ -64,7 +83,7 @@ function move() {
     squares[newSnakeHead].classList.add('snake');
     squares[snakeTail].classList.remove('snake');
 
-    if (squares[newSnakeHead].firstElementChild.classList.contains('apple')) {
+    if (squares[newSnakeHead].firstElementChild) {
         squares[newSnakeHead].innerHTML = '';
         currentSnake.unshift(snakeTail);
         squares[snakeTail].classList.add('snake');
@@ -96,4 +115,8 @@ function controlGame(event) {
         case 'ArrowUp':
             direction = -gridSize;
     }
+}
+
+function saveScore(event) {
+    if (event.key === 'Enter') setupGame();
 }
