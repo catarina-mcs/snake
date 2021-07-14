@@ -13,7 +13,8 @@ body {
 
 .container {
     box-sizing: content-box;
-    width: 1160px;
+    min-width: 1100px;
+    max-width: 1130px;
     height: 100%;
     margin: 0 auto;
     padding: 0 2em;
@@ -26,7 +27,6 @@ body {
     background-color: #FFFCE8;
     color: #371A38;
     box-sizing: content-box;
-    margin: 0 5em;
     padding: 20px;
     display: inline-block;
     position: relative;
@@ -162,4 +162,14 @@ input {
 
 .score {
     justify-self: right;
+}
+
+@media screen and (max-width:1280px) {
+    html {
+        font-size: 14px;
+    }
+
+    .title {
+        margin-bottom: 0.25em;
+    }
 }
