@@ -8,7 +8,7 @@ const playerName = document.getElementById('player-name');
 const leaderboard = document.querySelector('.table');
 let currentSnake = [0,1,2];
 let appleIndex = 6;
-let speed = 0.8;
+let speed = 0.95;
 let direction, intervalTime, timerId, appleCount, score, players;
 
 window.onload = () => {
@@ -44,7 +44,6 @@ function setupGame() {
     scoreDisplay.textContent = score;
 
     currentSnake.forEach(i => squares[i].classList.add('snake'));
-    generateApple();
     document.addEventListener('keydown', startGame);
 }
 setupGame();
@@ -63,6 +62,7 @@ function startGame(event) {
         document.removeEventListener('keydown', startGame);
         document.addEventListener('keydown', controlGame);
         timerId = setInterval(move, intervalTime);
+        generateApple();
     }
 }
 
@@ -104,7 +104,7 @@ function move() {
         generateApple();
         clearInterval(timerId);
 
-        if (intervalTime > 400) intervalTime = intervalTime * speed;
+        if (intervalTime > 200) intervalTime = intervalTime * speed;
 
         timerId = setInterval(move, intervalTime);
     }
