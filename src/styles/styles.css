@@ -135,16 +135,23 @@ input {
 }
 
 .leaderboard {
-    min-width: 300px;
+    min-width: 280px;
     min-height: 440px;
-    display: grid;
-    grid-row-gap: 0.7em;
-    grid-column-gap: 2em;
-    grid-template-columns: repeat(3, auto); 
 }
 
 .score-title {
     text-align: center;
     margin-bottom: 1.5em;
-    grid-column: 1 / -1;
+}
+
+.table {
+    text-transform: lowercase;
+    display: grid;
+    grid-row-gap: 0.6em;
+    grid-column-gap: 1em;
+    grid-template-columns: 20px 100px auto;
+}
+
+.score {
+    justify-self: right;
 }

@@ -4,7 +4,9 @@ const squares = document.getElementsByClassName('square');
 const appleCountDisplay = document.getElementById('apple-count');
 const scoreDisplay = document.getElementById('score');
 const overlay = document.querySelector('.overlay');
-// const playerName = document.getElementById('player-name');
+const playerName = document.getElementById('player-name');
+const leaderboard = document.querySelector('.table');
+let players = [];
 let currentSnake = [0,1,2];
 let appleIndex = 6;
 let speed = 0.8;
@@ -47,7 +49,7 @@ function generateApple() {
     do {
         appleIndex = Math.floor(Math.random() * squares.length);
     } while (squares[appleIndex].classList.contains('snake'));
-    squares[appleIndex].innerHTML = '<img src="./images/apple.svg" alt="apple-icon" class="apple">'
+    squares[appleIndex].innerHTML = '<img src="./images/apple.svg" alt="apple-icon" class="apple">';
 }
 
 
@@ -71,7 +73,9 @@ function move() {
         (snakeHead - gridSize < 0 && direction === -gridSize) ||
         squares[snakeHead + direction].classList.contains('snake')
     ) {
+        playerName.value = '';
         overlay.style.display = 'block';
+        playerName.focus();
         document.addEventListener('keydown', saveScore);
         clearInterval(timerId);
         return;
@@ -118,5 +122,32 @@ function controlGame(event) {
 }
 
 function saveScore(event) {
-    if (event.key === 'Enter') setupGame();
+    if (event.key === 'Enter') {
+    
+        players = JSON.parse(localStorage.getItem('players'));
+        players.push({
+            name: playerName.value ? playerName.value : 'Anonymous',
+            score: score
+        })
+        players.sort((a,b) => {
+            if (a.score >= b.score) return 0
+            if (a.score < b.score) return 1
+        })
+        players.splice(10,1)
+        updateLeaderboard();
+        setupGame();
+        localStorage.setItem(JSON.stringify(players));
+    }
+}
+
+function updateLeaderboard() {
+    let html = '';
+    players.forEach((player,index) => {
+        html += `
+            <p>${index+1}</p>
+            <p>${player.name}</p>
+            <p class="score">${player.score} pts</p>
+        `
+    })
+    leaderboard.innerHTML = html;
 }
