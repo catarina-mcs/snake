@@ -9,41 +9,40 @@
     <title>Snake</title>
 </head>
 <body>
-    <section class="commands">
-        <div>
-            <p>Press enter to <br> start the game</p>
-            <img src="./images/enter.svg" alt="enter" class="enter">
-        </div>
-        <div>
-            <p>Use the arrows to <br> move the snake</p>
-            <img src="./images/arrows.svg" alt="arrow-up" class="arrows">
-        </div>
-    </section>
-
-    <section class="game">
-        <h1 class="title">Snake</h1>
-        <div class="score-info">
-            <div class="apples">
-                <img src="./images/apple.svg" alt="apple-icon" class="apple-score">
-                <span id="apple-count">0</span>
+    <div class="container">
+        <section class="commands">
+            <div>
+                <p>Press enter to <br> start the game</p>
+                <img src="./images/enter.svg" alt="enter" class="enter">
             </div>
-            <p>Score: <span id="score">0</span> pts</p>
-        </div>
-        <div class="grid"></div>
-
-        <div class="overlay">
-            <div class="popup-box">
-                <h2 class="gameover">Gameover</h2>
-                <input type="text" placeholder="Your name here" maxlength="10" id="player-name">
-                <p>Press enter ↵ to save your score and continue</p>
+            <div>
+                <p>Use the arrows to <br> move the snake</p>
+                <img src="./images/arrows.svg" alt="arrow-up" class="arrows">
             </div>
-        </div>
-    </section>
-
-    <section class="leaderboard">
-        <p class="score-title">Highest Scores</p>
-        <div class="table"></div>
-    </section>
+        </section>
+        <section class="game">
+            <h1 class="title">Snake</h1>
+            <div class="score-info">
+                <div class="apples">
+                    <img src="./images/apple.svg" alt="apple-icon" class="apple-score">
+                    <span id="apple-count">0</span>
+                </div>
+                <p>Score: <span id="score">0</span> pts</p>
+            </div>
+            <div class="grid"></div>
+            <div class="overlay">
+                <div class="popup-box">
+                    <h2 class="gameover">Gameover</h2>
+                    <input type="text" placeholder="Your name here" maxlength="10" id="player-name">
+                    <p>Press enter ↵ to save your score and continue</p>
+                </div>
+            </div>
+        </section>
+        <section class="leaderboard">
+            <p class="score-title">Highest Scores</p>
+            <div class="table"></div>
+        </section>
+    </div>
     
     <script src="./scripts/index.js"></script>
 </body>
