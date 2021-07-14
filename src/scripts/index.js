@@ -6,11 +6,16 @@ const scoreDisplay = document.getElementById('score');
 const overlay = document.querySelector('.overlay');
 const playerName = document.getElementById('player-name');
 const leaderboard = document.querySelector('.table');
-let players = [];
 let currentSnake = [0,1,2];
 let appleIndex = 6;
 let speed = 0.8;
-let direction, intervalTime, timerId, appleCount, score;
+let direction, intervalTime, timerId, appleCount, score, players;
+
+window.onload = () => {
+    let storedPlayers = JSON.parse(localStorage.getItem('players'));
+    players = storedPlayers ? storedPlayers : [];
+    updateLeaderboard();
+};
 
 
 function createGrid() {
@@ -122,9 +127,9 @@ function controlGame(event) {
 }
 
 function saveScore(event) {
-    if (event.key === 'Enter') {
-    
-        players = JSON.parse(localStorage.getItem('players'));
+    if (event.key === 'Enter') {    
+        let storedPlayers = JSON.parse(localStorage.getItem('players'));
+        players = storedPlayers ? storedPlayers : [];
         players.push({
             name: playerName.value ? playerName.value : 'Anonymous',
             score: score
@@ -133,10 +138,10 @@ function saveScore(event) {
             if (a.score >= b.score) return 0
             if (a.score < b.score) return 1
         })
-        players.splice(10,1)
+        players.splice(10,1);
+        localStorage.setItem('players', JSON.stringify(players));
         updateLeaderboard();
         setupGame();
-        localStorage.setItem(JSON.stringify(players));
     }
 }
 
